@@ -1,0 +1,17 @@
+# Initiales Projekt
+git commit -m "ADD: Initiale devhub.html mit Grundstruktur und Style"
+
+# Features
+git commit -m "ADD: Aufgaben-Datenbank für Python und JavaScript"
+git commit -m "ADD: Bluebot-Assistent mit Tipp-Funktion"
+git commit -m "ADD: LocalStorage-Speicherung für Fortschritt und Notizen"
+git commit -m "ADD: Sprach-Tabs für 5 Programmiersprachen"
+git commit -m "ADD: Split-View mit Editor und Aufgabenstellung"
+git commit -m "ADD: Fortschrittsbalken mit Prozentanzeige"
+git commit -m "ADD: Prüf-Funktion für Lösungen mit Keyword-Check"
+git commit -m "ADD: Responsive Design für mobile Geräte"
+git commit -m "ADD: Notizfeld pro Aufgabe mit automatischem Speichern"
+
+# Dokumentation
+git commit -m "ADD: README.md mit Projektbeschreibung"
+git commit -m "ADD: Lizenz MIT hinzugefügt"
