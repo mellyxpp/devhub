@@ -1,0 +1,21 @@
+# Design-Optimierungen
+git commit -m "MOD: Farbpalette für bessere Lesbarkeit angepasst"
+git commit -m "MOD: Bluebot-Animation flüssiger gemacht"
+git commit -m "MOD: Task-Grid von 3 auf 5 Spalten erweitert"
+git commit -m "MOD: Editor-Schriftart zu Fira Code geändert"
+
+# Inhalte
+git commit -m "MOD: Aufgabenbeschreibungen verständlicher formuliert"
+git commit -m "MOD: Code-Beispiele in Aufgaben verbessert"
+git commit -m "MOD: Tipp-Texte hilfreicher gestaltet"
+git commit -m "MOD: Footer-Text aktualisiert"
+
+# Funktionalität
+git commit -m "MOD: Code-Ausführung für Python verbessert"
+git commit -m "MOD: LocalStorage-Speicherung optimiert"
+git commit -m "MOD: Progress-Balken aktualisiert sich jetzt sofort"
+git commit -m "MOD: Buttons für bessere UX umgestaltet"
+
+# Performance
+git commit -m "MOD: JavaScript-Code aufgeräumt und optimiert"
+git commit -m "MOD: CSS-Klassen zusammengefasst für kleinere Datei"
