@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevHub – Code. Lerne. Wachse.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+            line-height: 1.5;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .logo h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo span {
+            font-size: 1rem;
+            color: #64748b;
+            margin-left: 0.5rem;
+            font-weight: 400;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: #475569;
+        }
+
+        /* Bluebot */
+        .bot-wrapper {
+            position: relative;
+        }
+
+        .bluebot {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(145deg, #3b82f6, #2563eb);
+            border-radius: 40% 60% 50% 50% / 50% 40% 60% 50%;
+            animation: float 4s ease-in-out infinite;
+            cursor: pointer;
+            box-shadow: 0 20px 30px -10px rgba(37, 99, 235, 0.4);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .bot-message {
+            position: absolute;
+            top: -40px;
+            right: -100px;
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            white-space: nowrap;
+            font-size: 0.9rem;
+        }
+
+        /* Language Tabs */
+        .language-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .lang-tab {
+            padding: 0.8rem 1.5rem;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 40px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .lang-tab:hover {
+            border-color: #2563eb;
+            color: #2563eb;
+        }
+
+        .lang-tab.active {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+
+        /* Task Grid */
+        .task-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .task-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 1rem;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .task-card:hover {
+            transform: translateY(-3px);
+            border-color: #2563eb;
+            box-shadow: 0 10px 20px -10px #2563eb;
+        }
+
+        .task-card.active {
+            border-color: #2563eb;
+            background: #eff6ff;
+        }
+
+        .task-card.completed {
+            background: #f0fdf4;
+            border-color: #22c55e;
+        }
+
+        .task-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2563eb;
+            margin-bottom: 0.5rem;
+        }
+
+        .task-title {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .task-check {
+            color: #22c55e;
+            font-size: 1.2rem;
+        }
+
+        /* Split View */
+        .split-view {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            border: 1px solid #e2e8f0;
+            margin-top: 1rem;
+        }
+
+        /* Linke Seite - Aufgabenstellung */
+        .task-left {
+            background: #f8fafc;
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+
+        .task-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .task-header h3 {
+            font-size: 1.3rem;
+            color: #0f172a;
+        }
+
+        .task-description {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .task-description p {
+            color: #334155;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .task-description ul {
+            margin-left: 1.5rem;
+            color: #475569;
+        }
+
+        .task-description li {
+            margin: 0.5rem 0;
+        }
+
+        .concept-highlight {
+            background: #dbeafe;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #1e40af;
+        }
+
+        /* Notizfeld */
+        .notes-section {
+            background: white;
+            border-radius: 1rem;
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 1.5rem;
+        }
+
+        .notes-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .notes-header h4 {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        .notes-area {
+            width: 100%;
+            min-height: 80px;
+            padding: 0.8rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            font-family: inherit;
+            resize: vertical;
+        }
+
+        .notes-area:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        /* Bluebot Tipps */
+        .bluebot-tip {
+            background: #f0f9ff;
+            border-left: 4px solid #2563eb;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .bluebot-icon {
+            font-size: 1.5rem;
+        }
+
+        .bluebot-tip p {
+            color: #2563eb;
+            font-size: 0.95rem;
+        }
+
+        /* Rechte Seite - Code Editor */
+        .task-right {
+            background: #0f172a;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+
+        .editor-header {
+            background: #1e293b;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .editor-language {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .editor-btn {
+            padding: 0.3rem 0.8rem;
+            background: #334155;
+            border: none;
+            border-radius: 0.4rem;
+            color: white;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        .code-area {
+            padding: 1rem;
+        }
+
+        .code-textarea {
+            width: 100%;
+            min-height: 250px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 0.5rem;
+            color: #38bdf8;
+            font-family: 'Fira Code', monospace;
+            padding: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            resize: vertical;
+        }
+
+        .code-textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .output-area {
+            background: #1e293b;
+            padding: 1rem;
+        }
+
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            color: #94a3b8;
+            margin-bottom: 0.5rem;
+        }
+
+        .output-content {
+            background: #0f172a;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            color: #10b981;
+            font-family: 'Fira Code', monospace;
+            min-height: 60px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+            flex: 1;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #334155;
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e1;
+        }
+
+        /* Fortschritt */
+        .progress-bar {
+            height: 4px;
+            background: #e2e8f0;
+            border-radius: 2px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #2563eb;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .split-view {
+                grid-template-columns: 1fr;
+            }
+            
+            .task-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .task-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <h1>DevHub <span>— Code. Lerne. Wachse.</span></h1>
+            </div>
+            <div class="bot-wrapper">
+                <div class="bluebot" onclick="showBotTip()"></div>
+                <div id="botMessage" class="bot-message" style="display: none;">👋 Klick auf eine Aufgabe!</div>
+            </div>
+        </header>
+
+        <!-- Language Tabs -->
+        <div class="language-tabs">
+            <button class="lang-tab active" onclick="switchLanguage('python')">🐍 Python</button>
+            <button class="lang-tab" onclick="switchLanguage('javascript')">📜 JavaScript</button>
+            <button class="lang-tab" onclick="switchLanguage('java')">☕ Java</button>
+            <button class="lang-tab" onclick="switchLanguage('html')">🌐 HTML/CSS</button>
+            <button class="lang-tab" onclick="switchLanguage('cpp')">⚙️ C++</button>
+        </div>
+
+        <!-- Task Grid (5 Aufgaben) -->
+        <div class="task-grid" id="taskGrid">
+            <div class="task-card active" onclick="selectTask(1)">
+                <div class="task-number">1</div>
+                <div class="task-title">Variablen</div>
+                <div class="task-check" id="taskCheck1"></div>
+            </div>
+            <div class="task-card" onclick="selectTask(2)">
+                <div class="task-number">2</div>
+                <div class="task-title">Bedingungen</div>
+                <div class="task-check" id="taskCheck2"></div>
+            </div>
+            <div class="task-card" onclick="selectTask(3)">
+                <div class="task-number">3</div>
+                <div class="task-title">Schleifen</div>
+                <div class="task-check" id="taskCheck3"></div>
+            </div>
+            <div class="task-card" onclick="selectTask(4)">
+                <div class="task-number">4</div>
+                <div class="task-title">Listen</div>
+                <div class="task-check" id="taskCheck4"></div>
+            </div>
+            <div class="task-card" onclick="selectTask(5)">
+                <div class="task-number">5</div>
+                <div class="task-title">Funktionen</div>
+                <div class="task-check" id="taskCheck5"></div>
+            </div>
+        </div>
+
+        <!-- Split View: Aufgabe links + Editor rechts -->
+        <div class="split-view">
+            <!-- Linke Seite: Aufgabenstellung, Notizen, Bluebot -->
+            <div class="task-left">
+                <div class="task-header">
+                    <h3 id="taskTitle">📝 Variablen und Datentypen</h3>
+                </div>
+
+                <!-- Aufgabenstellung -->
+                <div class="task-description" id="taskDescription">
+                    <p>Lerne, wie man <span class="concept-highlight">Variablen</span> in Python erstellt und verwendet.</p>
+                    <ul>
+                        <li><strong>Text:</strong> name = "Max"</li>
+                        <li><strong>Zahlen:</strong> alter = 25</li>
+                        <li><strong>Wahrheitswerte:</strong> ist_lerner = True</li>
+                    </ul>
+                </div>
+
+                <!-- Notizfeld -->
+                <div class="notes-section">
+                    <div class="notes-header">
+                        <h4>📌 Meine Notizen</h4>
+                        <span id="noteCount">0 Zeichen</span>
+                    </div>
+                    <textarea class="notes-area" id="notesArea" placeholder="Schreibe hier deine Gedanken zur Aufgabe..."></textarea>
+                </div>
+
+                <!-- Bluebot Tipp -->
+                <div class="bluebot-tip" id="bluebotTip">
+                    <div class="bluebot-icon">🤖</div>
+                    <p id="tipText">Tipp: Denk an die Anführungszeichen bei Text!</p>
+                </div>
+            </div>
+
+            <!-- Rechte Seite: Code Editor + Ausgabe -->
+            <div class="task-right">
+                <div class="editor-header">
+                    <span class="editor-language" id="editorLanguage">Python</span>
+                    <button class="editor-btn" onclick="resetCode()">Reset</button>
+                </div>
+
+                <div class="code-area">
+                    <textarea class="code-textarea" id="codeEditor" placeholder="Schreibe hier deinen Code...">name = "Max"
+alter = 25
+print(name)
+print(alter)</textarea>
+                </div>
+
+                <div class="output-area">
+                    <div class="output-header">
+                        <span>📟 Ausgabe</span>
+                        <span>Konsolenausgabe</span>
+                    </div>
+                    <div class="output-content" id="output">
+                        ▶️ Klick auf "Ausführen"
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="runCode()">▶️ Ausführen</button>
+                    <button class="btn btn-secondary" onclick="checkSolution()">✓ Prüfen</button>
+                    <button class="btn btn-secondary" onclick="showNextTip()">💡 Tipp</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fortschrittsbalken -->
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 20%"></div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>DevHub – 5 interaktive Aufgaben pro Sprache · Code direkt im Browser ausführen</p>
+        </footer>
+    </div>
+
+    <script>
+        // Aktuelle Sprache und Aufgabe
+        let currentLanguage = 'python';
+        let currentTask = 1;
+        
+        // Fortschritt (welche Aufgaben wurden gelöst)
+        let progress = {
+            python: [false, false, false, false, false],
+            javascript: [false, false, false, false, false],
+            java: [false, false, false, false, false],
+            html: [false, false, false, false, false],
+            cpp: [false, false, false, false, false]
+        };
+
+        // Aufgaben-Datenbank
+        const tasks = {
+            python: {
+                name: 'Python',
+                tasks: [
+                    {
+                        title: 'Variablen und Datentypen',
+                        description: '<p>Lerne, wie man <span class="concept-highlight">Variablen</span> in Python erstellt und verwendet.</p><ul><li><strong>Text:</strong> name = "Max"</li><li><strong>Zahlen:</strong> alter = 25</li><li><strong>Wahrheitswerte:</strong> ist_lerner = True</li></ul><p><strong>Deine Aufgabe:</strong> Erstelle drei Variablen: name (dein Name), alter (dein Alter) und stadt (deine Stadt). Gib alle mit print() aus.</p>',
+                        tip: 'Denk an die Anführungszeichen bei Text!',
+                        code: 'name = "Max"\nalter = 25\nstadt = "Berlin"\nprint(name)\nprint(alter)\nprint(stadt)',
+                        check: ['name', 'alter', 'stadt', 'print']
+                    },
+                    {
+                        title: 'Bedingungen (if/else)',
+                        description: '<p><span class="concept-highlight">if/else</span> lässt dein Programm Entscheidungen treffen.</p><ul><li>if bedingung: Code wenn True</li><li>else: Code wenn False</li><li>elif: weitere Bedingungen</li></ul><p><strong>Deine Aufgabe:</strong> Erstelle eine Variable "temperatur". Wenn sie über 25 ist, gib "Heiß" aus, sonst "Angenehm".</p>',
+                        tip: 'Vergleichsoperatoren: >, <, >=, <=, ==, !=',
+                        code: 'temperatur = 30\nif temperatur > 25:\n    print("Heiß")\nelse:\n    print("Angenehm")',
+                        check: ['if', 'else', 'print']
+                    },
+                    {
+                        title: 'Schleifen (for)',
+                        description: '<p><span class="concept-highlight">for-Schleifen</span> wiederholen Code.</p><ul><li>for i in range(5): wiederholt 5x</li><li>for zahl in liste: durchläuft Liste</li></ul><p><strong>Deine Aufgabe:</strong> Schreibe eine for-Schleife, die die Zahlen 1 bis 5 ausgibt.</p>',
+                        tip: 'range(1,6) erzeugt Zahlen 1-5',
+                        code: 'for i in range(1, 6):\n    print(i)',
+                        check: ['for', 'range', 'print']
+                    },
+                    {
+                        title: 'Listen',
+                        description: '<p><span class="concept-highlight">Listen</span> speichern mehrere Werte.</p><ul><li>erstellen: zahlen = [1, 2, 3]</li><li>zugreifen: zahlen[0] (erste Element)</li><li>anhängen: zahlen.append(4)</li></ul><p><strong>Deine Aufgabe:</strong> Erstelle eine Liste mit 3 Lieblingsfrüchten und gib sie aus.</p>',
+                        tip: 'Listen werden mit eckigen Klammern erstellt',
+                        code: 'fruechte = ["Apfel", "Banane", "Kirsche"]\nprint(fruechte)',
+                        check: ['[', ']', 'print']
+                    },
+                    {
+                        title: 'Funktionen',
+                        description: '<p><span class="concept-highlight">Funktionen</span> gruppieren Code.</p><ul><li>def funktionsname(parameter):</li><li>return gibt Wert zurück</li></ul><p><strong>Deine Aufgabe:</strong> Schreibe eine Funktion "begruesse(name)", die "Hallo, [name]!" ausgibt.</p>',
+                        tip: 'Vergiss das return nicht, wenn du einen Wert zurückgeben willst',
+                        code: 'def begruesse(name):\n    print("Hallo, " + name + "!")\n\nbegruesse("Max")',
+                        check: ['def', 'print']
+                    }
+                ]
+            },
+            javascript: {
+                name: 'JavaScript',
+                tasks: [
+                    {
+                        title: 'Variablen (let/const)',
+                        description: '<p><span class="concept-highlight">let</span> und <span class="concept-highlight">const</span> für Variablen.</p><ul><li>let veränderbar</li><li>const unveränderbar</li></ul><p><strong>Deine Aufgabe:</strong> Erstelle let name = "Max" und const alter = 25. Gib beide mit console.log() aus.</p>',
+                        tip: 'console.log() für Ausgaben in JavaScript',
+                        code: 'let name = "Max";\nconst alter = 25;\nconsole.log(name);\nconsole.log(alter);',
+                        check: ['let', 'const', 'console.log']
+                    }
+                ]
+            }
+        };
+
+        // Sprache wechseln
+        function switchLanguage(language) {
+            currentLanguage = language;
+            
+            // Tabs aktualisieren
+            document.querySelectorAll('.lang-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Editor-Sprache aktualisieren
+            document.getElementById('editorLanguage').textContent = tasks[language].name;
+            
+            // Fortschritt aktualisieren
+            updateProgressDisplay();
+            
+            // Aufgabe 1 laden
+            selectTask(1);
+        }
+
+        // Aufgabe auswählen
+        function selectTask(taskNumber) {
+            currentTask = taskNumber;
+            
+            // Task-Cards aktualisieren
+            document.querySelectorAll('.task-card').forEach((card, index) => {
+                if (index + 1 === taskNumber) {
+                    card.classList.add('active');
+                } else {
+                    card.classList.remove('active');
+                }
+            });
+            
+            // Aufgabe laden
+            const task = tasks[currentLanguage].tasks[taskNumber - 1];
+            
+            document.getElementById('taskTitle').textContent = `📝 ${task.title}`;
+            document.getElementById('taskDescription').innerHTML = task.description;
+            document.getElementById('codeEditor').value = task.code;
+            document.getElementById('tipText').textContent = `Tipp: ${task.tip}`;
+            
+            // Ausgabe leeren
+            document.getElementById('output').innerHTML = '▶️ Klick auf "Ausführen"';
+            
+            // Notizen laden
+            loadNotes();
+        }
+
+        // Code ausführen
+        function runCode() {
+            const code = document.getElementById('codeEditor').value;
+            const output = document.getElementById('output');
+            
+            // Simulierte Ausführung
+            if (currentLanguage === 'python') {
+                if (code.includes('print')) {
+                    // Extrahiere print-Inhalte (vereinfacht)
+                    const lines = code.split('\n');
+                    let result = '';
+                    lines.forEach(line => {
+                        if (line.includes('print')) {
+                            const match = line.match(/print\(([^)]+)\)/);
+                            if (match) {
+                                result += match[1].replace(/["']/g, '') + '\n';
+                            }
+                        }
+                    });
+                    output.innerHTML = result || 'Code ausgeführt (keine Ausgabe)';
+                } else {
+                    output.innerHTML = '⚠️ Keine print()-Ausgabe gefunden';
+                }
+            } else if (currentLanguage === 'javascript') {
+                if (code.includes('console.log')) {
+                    output.innerHTML = 'Code ausgeführt (siehe Browser-Konsole)';
+                }
+            }
+        }
+
+        // Lösung prüfen
+        function checkSolution() {
+            const task = tasks[currentLanguage].tasks[currentTask - 1];
+            const code = document.getElementById('codeEditor').value;
+            
+            // Einfache Prüfung
+            let allChecksPassed = true;
+            task.check.forEach(keyword => {
+                if (!code.includes(keyword)) {
+                    allChecksPassed = false;
+                }
+            });
+            
+            if (allChecksPassed) {
+                alert('✅ Richtig! Gut gemacht!');
+                
+                // Fortschritt markieren
+                progress[currentLanguage][currentTask - 1] = true;
+                document.getElementById(`taskCheck${currentTask}`).innerHTML = '✓';
+                document.querySelectorAll('.task-card')[currentTask - 1].classList.add('completed');
+                
+                // Fortschrittsbalken aktualisieren
+                updateProgressDisplay();
+                
+                // Bluebot Lob
+                showBotMessage('🌟 Super! Weiter so!');
+            } else {
+                alert('❌ Nicht ganz richtig. Versuch es noch einmal!');
+                showBotMessage('💡 Tipp: ' + task.tip);
+            }
+        }
+
+        // Fortschrittsanzeige aktualisieren
+        function updateProgressDisplay() {
+            const langProgress = progress[currentLanguage];
+            let completedCount = 0;
+            
+            langProgress.forEach((completed, index) => {
+                if (completed) {
+                    document.getElementById(`taskCheck${index + 1}`).innerHTML = '✓';
+                    document.querySelectorAll('.task-card')[index].classList.add('completed');
+                    completedCount++;
+                } else {
+                    document.getElementById(`taskCheck${index + 1}`).innerHTML = '';
+                    document.querySelectorAll('.task-card')[index].classList.remove('completed');
+                }
+            });
+            
+            const progressPercent = (completedCount / 5) * 100;
+            document.getElementById('progressFill').style.width = progressPercent + '%';
+        }
+
+        // Notizen speichern/laden
+        function saveNotes() {
+            const notes = document.getElementById('notesArea').value;
+            localStorage.setItem(`notes_${currentLanguage}_${currentTask}`, notes);
+            document.getElementById('noteCount').textContent = notes.length + ' Zeichen';
+            showBotMessage('📝 Notizen gespeichert!');
+        }
+
+        function loadNotes() {
+            const notes = localStorage.getItem(`notes_${currentLanguage}_${currentTask}`);
+            if (notes) {
+                document.getElementById('notesArea').value = notes;
+                document.getElementById('noteCount').textContent = notes.length + ' Zeichen';
+            } else {
+                document.getElementById('notesArea').value = '';
+                document.getElementById('noteCount').textContent = '0 Zeichen';
+            }
+        }
+
+        // Code zurücksetzen
+        function resetCode() {
+            const task = tasks[currentLanguage].tasks[currentTask - 1];
+            document.getElementById('codeEditor').value = task.code;
+            showBotMessage('🔄 Code zurückgesetzt');
+        }
+
+        // Bluebot Nachrichten
+        function showBotMessage(message) {
+            const botMessage = document.getElementById('botMessage');
+            botMessage.textContent = message;
+            botMessage.style.display = 'block';
+            
+            setTimeout(() => {
+                botMessage.style.display = 'none';
+            }, 3000);
+        }
+
+        function showBotTip() {
+            showBotMessage('👋 Klick auf eine Aufgabe und leg los!');
+        }
+
+        function showNextTip() {
+            const task = tasks[currentLanguage].tasks[currentTask - 1];
+            showBotMessage('💡 ' + task.tip);
+        }
+
+        // Notizen automatisch speichern bei Änderung
+        document.getElementById('notesArea').addEventListener('input', function() {
+            const notes = this.value;
+            document.getElementById('noteCount').textContent = notes.length + ' Zeichen';
+            localStorage.setItem(`notes_${currentLanguage}_${currentTask}`, notes);
+        });
+
+        // Initialisierung
+        window.onload = function() {
+            // Fortschritt aus LocalStorage laden
+            const savedProgress = localStorage.getItem('devhub_progress');
+            if (savedProgress) {
+                progress = JSON.parse(savedProgress);
+            }
+            
+            // Aufgabe 1 laden
+            selectTask(1);
+            
+            // Bluebot Begrüßung
+            setTimeout(() => {
+                showBotMessage('👋 Willkommen bei DevHub!');
+            }, 1000);
+        };
+
+        // Fortschritt speichern vor dem Schließen
+        window.onbeforeunload = function() {
+            localStorage.setItem('devhub_progress', JSON.stringify(progress));
+        };
+    </script>
+</body>
+</html>
