@@ -1,0 +1,7 @@
+# Bugfixes
+git commit -m "FIX: Bluebot-Nachricht verschwindet jetzt nach 3 Sekunden"
+git commit -m "FIX: Fortschrittsbalken zeigt korrekte Prozent an"
+git commit -m "FIX: Sprachwechsel setzt aktive Aufgabe zurück"
+git commit -m "FIX: Notizen werden jetzt sprachspezifisch gespeichert"
+git commit -m "FIX: Code-Reset lädt richtige Aufgabe"
+git commit -m "FIX: Task-Cards zeigen Haken bei gelösten Aufgaben"
