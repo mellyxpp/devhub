@@ -1,0 +1,10 @@
+# Struktur verbessern
+git commit -m "REFACTOR: tasks-Datenbank in übersichtlichere Struktur gebracht"
+git commit -m "REFACTOR: JavaScript-Funktionen in logische Blöcke sortiert"
+git commit -m "REFACTOR: Wiederholenden CSS-Code in Klassen ausgelagert"
+git commit -m "REFACTOR: Bluebot-Logik in eigene Funktionen ausgelagert"
+
+# Clean Code
+git commit -m "REFACTOR: Variablennamen aussagekräftiger gemacht"
+git commit -m "REFACTOR: If-Else-Struktur vereinfacht"
+git commit -m "REFACTOR: HTML-Struktur semantischer gestaltet"
