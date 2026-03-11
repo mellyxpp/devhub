@@ -1,0 +1,15 @@
+# Aufräumen
+git commit -m "DEL: Nicht verwendete CSS-Klassen entfernt"
+git commit -m "DEL: Veraltete Kommentare aus dem Code gelöscht"
+git commit -m "DEL: Doppelte Style-Definitionen entfernt"
+git commit -m "DEL: Nicht benötigte console.log-Aufrufe gelöscht"
+
+# Alte Features
+git commit -m "DEL: Veraltete Aufgaben-Datenbank für Ruby entfernt"
+git commit -m "DEL: Nicht genutzte Font-Dateien gelöscht"
+git commit -m "DEL: Platzhalter-Texte aus Aufgaben entfernt"
+
+# Bereinigung
+git commit -m "DEL: Überflüssige Leerzeilen im Code entfernt"
+git commit -m "DEL: Test-Kommentare aus JavaScript gelöscht"
+git commit -m "DEL: Alte Debugging-Funktionen entfernt"
