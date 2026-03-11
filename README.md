@@ -6,9 +6,6 @@ Willkommen bei **DevHub**, deiner interaktiven Lernplattform für Programmierung
 
 ## 🔗 DevHub sofort ausprobieren
 
-**Live-Demo:** [Hier Link einfügen, wenn vorhanden]  
-👉 _Einfach klicken und die Lernumgebung öffnet sich im Browser – ohne Installation, ohne Setup._
-
 ## 📖 Über das Projekt
 
 DevHub ist eine browserbasierte Lernplattform, die angehenden Entwicklern den Einstieg in die Programmierung erleichtert. Die Idee entstand aus dem Wunsch, eine niedrigschwellige Möglichkeit zum Üben zu schaffen – ganz ohne komplexe Entwicklungsumgebungen. Mit einem interaktiven Split-Screen-Design siehst du links die Aufgabenstellung und rechts den Code-Editor. Dein Fortschritt wird automatisch gespeichert, und der kleine Helfer "Bluebot" gibt dir hilfreiche Tipps.
