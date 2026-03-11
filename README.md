@@ -57,9 +57,6 @@ So kannst du DevHub lokal nutzen oder anpassen:
 *   Benutzerkonten für cloudbasierten Fortschritt
 *   Community-Funktionen zum Teilen von Lösungen
 
-## 📄 Lizenz
-
-Dieses Projekt ist [MIT](https://opensource.org/licenses/MIT) lizenziert. Du kannst es frei verwenden, anpassen und weitergeben.
 
 ## 🤝 Mitwirken
 
